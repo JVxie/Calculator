@@ -62,11 +62,11 @@ class LexDFA {
                 nowStr = String.valueOf(nowCh);
                 ++i;
             } else if (state.equals("OPT")) {
-                result.addElement(new Pair<String, String>("运算符", nowStr));
+                result.addElement(new Pair<>("运算符", nowStr));
                 state = "S";
             } else if (state.equals("ZERO")) {
                 if (isOpt(nowCh)) {
-                    result.addElement(new Pair<String, String>("十进制整数", nowStr));
+                    result.addElement(new Pair<>("十进制整数", nowStr));
                     state = "S";
                 } else {
                     if (isVal(nowCh, 8)) {
@@ -86,7 +86,7 @@ class LexDFA {
                     nowStr += String.valueOf(nowCh);
                     ++i;
                 } else if (isOpt(nowCh)) {
-                    result.addElement(new Pair<String, String>("八进制整数", nowStr));
+                    result.addElement(new Pair<>("八进制整数", nowStr));
                     state = "S";
                 } else if (nowCh == '.') {
                     nowStr += String.valueOf(nowCh);
@@ -110,7 +110,7 @@ class LexDFA {
                     nowStr += String.valueOf(nowCh);
                     ++i;
                 } else if (isOpt(nowCh)) {
-                    result.addElement(new Pair<String, String>("八进制实数", nowStr));
+                    result.addElement(new Pair<>("八进制实数", nowStr));
                     state = "S";
                 } else {
                     nowStr += String.valueOf(nowCh);
@@ -122,7 +122,7 @@ class LexDFA {
                     nowStr += String.valueOf(nowCh);
                     ++i;
                 } else if (isOpt(nowCh)) {
-                    result.addElement(new Pair<String, String>("十进制整数", nowStr));
+                    result.addElement(new Pair<>("十进制整数", nowStr));
                     state = "S";
                 } else if (nowCh == '.') {
                     nowStr += String.valueOf(nowCh);
@@ -146,7 +146,7 @@ class LexDFA {
                     nowStr += String.valueOf(nowCh);
                     ++i;
                 } else if (isOpt(nowCh)) {
-                    result.addElement(new Pair<String, String>("十进制实数", nowStr));
+                    result.addElement(new Pair<>("十进制实数", nowStr));
                     state = "S";
                 } else {
                     nowStr += String.valueOf(nowCh);
@@ -166,7 +166,7 @@ class LexDFA {
                     nowStr += String.valueOf(nowCh);
                     ++i;
                 } else if (isOpt(nowCh)) {
-                    result.addElement(new Pair<String, String>("十六进制整数", nowStr));
+                    result.addElement(new Pair<>("十六进制整数", nowStr));
                     state = "S";
                 } else if (nowCh == '.') {
                     nowStr += String.valueOf(nowCh);
@@ -178,7 +178,7 @@ class LexDFA {
                     state = "ER";
                 }
             } else if (state.equals("HEX_P")) {
-                if (isVal(nowCh, 10)) {
+                if (isVal(nowCh, 16)) {
                     nowStr += String.valueOf(nowCh);
                     ++i;
                     state = "HEX_R";
@@ -190,7 +190,7 @@ class LexDFA {
                     nowStr += String.valueOf(nowCh);
                     ++i;
                 } else if (isOpt(nowCh)) {
-                    result.addElement(new Pair<String, String>("十六进制实数", nowStr));
+                    result.addElement(new Pair<>("十六进制实数", nowStr));
                     state = "S";
                 } else {
                     nowStr += String.valueOf(nowCh);
@@ -200,7 +200,7 @@ class LexDFA {
             } else if (state.equals("ER")) {
                 if (isOpt(nowCh)) {
                     flag = 0;
-                    result.addElement(new Pair<String, String>("错误数据", nowStr));
+                    result.addElement(new Pair<>("错误数据", nowStr));
                     state = "S";
                 } else {
                     nowStr += String.valueOf(nowCh);
