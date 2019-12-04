@@ -6,9 +6,7 @@ import java.math.BigDecimal;
 
 class CalcFrame extends JFrame {
 
-    CalcFrame() {
-    }
-
+    private String title;
     private static String[] VALS = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"};
     private static String[] OPTS = {"(", ")", "+", "-", "*", "/", "=", ".", "x"};
     private static String[] CABS = {"Clear", "Back"};
@@ -16,7 +14,13 @@ class CalcFrame extends JFrame {
     private JLabel showLabel, octLabel, decLabel, hexLabel; // 文本框
     private JButton[] btnVals, btnOpts, btnCabs;
 
-    //private JButton testButton = new JButton("TEST");
+    CalcFrame() {
+        this("Calculator");
+    }
+
+    CalcFrame(String title) {
+        this.title = title;
+    }
 
     public void init() {
         btnVals = new JButton[VALS.length];
@@ -156,13 +160,13 @@ class CalcFrame extends JFrame {
 
     public void view() {
         init();
-        this.setTitle("Calculator");
+        this.setTitle(title);
         this.setResizable(false);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setFocusable(true);
         this.setVisible(true);
         Insets insets = this.getInsets();
-        this.setSize(420, insets.top + 615); // 140 * 205
+        this.setSize(insets.left + insets.right + 420, insets.top + insets.bottom + 615); // 140 * 205
         this.setLocationRelativeTo(null);
     }
 
@@ -230,6 +234,10 @@ class CalcFrame extends JFrame {
                 } else if (result.equals("语法错误")) {
                     setOctLabel("");
                     setDecLabel("语法错误");
+                    setHexLabel("");
+                } else if(result.contains("ERROR")) {
+                    setOctLabel("");
+                    setDecLabel(result);
                     setHexLabel("");
                 } else {
                     String oct = calc.toUnsignedString(new BigDecimal(result), 8);

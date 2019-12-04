@@ -67,7 +67,7 @@ class SyntaxFrame extends JFrame {
         this.setFocusable(true);
         this.setVisible(true);
         Insets insets = this.getInsets();
-        this.setSize(900, insets.top + 900);
+        this.setSize(insets.left + insets.right + 900, insets.top + insets.bottom + 900);
         this.setLocationRelativeTo(null);
     }
 

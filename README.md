@@ -15,7 +15,8 @@ Demo ：
 
 文件结构说明：
 
-	- Calculator - 总界面
+    - Calculator - 主类
+	- CalculatorFrame - 总界面
 	- LexDFAFrame - 词法分析器界面
 	- LexDFA - 词法分析实现
 	- SyntaxFrame - 语法分析器界面

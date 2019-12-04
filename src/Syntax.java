@@ -2,6 +2,7 @@ import java.util.Stack;
 import java.util.Vector;
 
 public class Syntax {
+
     private Stack<Integer> statu = new Stack<>();    // 建立状态栈[integer]
     private Stack<Integer> StatuOutput = new Stack<>();// 建立状态栈的倒推输出栈[integer]
     private Stack<Character> signer = new Stack<>();    // 建立符号栈[char]
