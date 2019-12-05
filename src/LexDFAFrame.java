@@ -86,6 +86,8 @@ class LexDFAFrame extends JFrame {
             }
             text += "</body></html>";
             showLabel.setText(text);
+
+            requestFocus();
         }
 
     }

@@ -33,9 +33,10 @@ class CalcFrame extends JFrame {
         for (int i = 0; i < CABS.length; ++i)
             btnCabs[i] = new JButton(CABS[i]);
 
-        /*
-            测试监听
-         */
+        // 监听事件
+        KeyListener keyListener = new KeyListener();
+        this.addKeyListener(keyListener);
+
         CalcValsListener calcValsListener = new CalcValsListener();
         for (int i = 0; i < VALS.length; ++i)
             btnVals[i].addActionListener(calcValsListener);
@@ -115,41 +116,6 @@ class CalcFrame extends JFrame {
         this.addButton(btnOpts[6], 300, 375, 60, 60);
 
         this.add(btnPanel);
-
-        // 全局监听
-        this.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                super.keyPressed(e);
-                int key = e.getKeyCode();
-                char keyChar = e.getKeyChar();
-                if (keyChar == '(') {
-                    btnOpts[0].doClick();
-                } else if (keyChar == ')') {
-                    btnOpts[1].doClick();
-                } else if (keyChar == '+') {
-                    btnOpts[2].doClick();
-                } else if (keyChar == '-') {
-                    btnOpts[3].doClick();
-                } else if (keyChar == '*') {
-                    btnOpts[4].doClick();
-                } else if (keyChar == '/') {
-                    btnOpts[5].doClick();
-                } else if (keyChar == '=' || key == KeyEvent.VK_ENTER) {
-                    btnOpts[6].doClick();
-                } else if (keyChar == '.') {
-                    btnOpts[7].doClick();
-                } else if (keyChar == 'x') {
-                    btnOpts[8].doClick();
-                } else if (keyChar >= '0' && keyChar <= '9') {
-                    btnVals[keyChar - '0'].doClick();
-                } else if (keyChar >= 'a' && keyChar <= 'f') {
-                    btnVals[keyChar - 'a' + 10].doClick();
-                } else if (key == KeyEvent.VK_BACK_SPACE) {
-                    btnCabs[1].doClick();
-                }
-            }
-        });
     }
 
     private void addButton(JButton button, int x, int y, int w, int h) {
@@ -208,6 +174,7 @@ class CalcFrame extends JFrame {
             } else if (text.length() < 45) {
                 setShowText(text + command);
             }
+            requestFocus();
         }
 
     }
@@ -216,6 +183,7 @@ class CalcFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+
             String command = e.getActionCommand();
             String text = getShowText();
             if (text.length() < 1) {
@@ -273,6 +241,7 @@ class CalcFrame extends JFrame {
                     setShowText(text + command);
                 }
             }
+            requestFocus();
         }
 
     }
@@ -295,8 +264,43 @@ class CalcFrame extends JFrame {
             } else {
                 if (text.length() >= 1) setShowText(text.substring(0, text.length() - 1));
             }
+            requestFocus();
         }
 
+    }
+
+    class KeyListener extends KeyAdapter {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            //super.keyPressed(e);
+            int key = e.getKeyCode();
+            char keyChar = e.getKeyChar();
+            if (keyChar == '(') {
+                btnOpts[0].doClick();
+            } else if (keyChar == ')') {
+                btnOpts[1].doClick();
+            } else if (keyChar == '+') {
+                btnOpts[2].doClick();
+            } else if (keyChar == '-') {
+                btnOpts[3].doClick();
+            } else if (keyChar == '*') {
+                btnOpts[4].doClick();
+            } else if (keyChar == '/') {
+                btnOpts[5].doClick();
+            } else if (keyChar == '=' || key == KeyEvent.VK_ENTER) {
+                btnOpts[6].doClick();
+            } else if (keyChar == '.') {
+                btnOpts[7].doClick();
+            } else if (keyChar == 'x') {
+                btnOpts[8].doClick();
+            } else if (keyChar >= '0' && keyChar <= '9') {
+                btnVals[keyChar - '0'].doClick();
+            } else if (keyChar >= 'a' && keyChar <= 'f') {
+                btnVals[keyChar - 'a' + 10].doClick();
+            } else if (key == KeyEvent.VK_BACK_SPACE) {
+                btnCabs[1].doClick();
+            }
+        }
     }
 
 }

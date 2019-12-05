@@ -102,6 +102,7 @@ class SyntaxFrame extends JFrame {
                 text += "</table></body></html>";
                 showLabel.setText(text);
             }
+            requestFocus();
         }
 
     }
